@@ -94,18 +94,20 @@ html {
   gap: 24px;
   box-shadow: 0px 2px 9px 0px #0000000e;
   border-radius: 5px;
+  color: inherit;
 }
 
 .dark-btn {
   display: flex;
   gap: 8px;
-  background-color: #ffffff;
+  background-color: transparent;
   border: 0;
+  color: inherit;
   span {
     font-size: 16px;
     font-weight: 600;
     line-height: 21.82px;
-    color: var(--blue-text-color);
+    color: inherit;
   }
 }
 
