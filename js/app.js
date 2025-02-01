@@ -1,4 +1,7 @@
 const loaderContainer = document.querySelector(".loader-container");
+const body = document.querySelector("body");
+const darkBtn = document.querySelector(".dark-btn");
+const list = document.querySelector("#list");
 
 async function getData() {
   loaderContainer.classList.remove("hidden");
@@ -8,7 +11,14 @@ async function getData() {
   return data;
 }
 
-const list = document.querySelector("#list");
+darkBtn.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("mode", "dark");
+  } else {
+    localStorage.removeItem("mode");
+  }
+});
 
 function generateCountires(countries) {
   countries.forEach((c) => {
@@ -17,23 +27,27 @@ function generateCountires(countries) {
     let p = document.createElement("p");
     let img = document.createElement("img");
     let cap = document.createElement("p");
-    // let popula = document.createElement("population");
+    let pop = document.createElement("p");
+    let reg = document.createElement("p");
+
     img.src = c.flags.svg;
-    img.width = 264;
-    img.height = 160;
     img.alt = c.flags.alt;
     p.textContent = c.name.common;
     cap.textContent = c.capital;
+    pop.textContent = c.population;
+    reg.textContent = c.region;
 
     li.appendChild(img);
+    img.width = "264";
+    img.height = "160";
+
     li.appendChild(p);
+    li.appendChild(pop);
+    li.appendChild(reg);
     li.appendChild(cap);
     list.appendChild(li);
   });
 }
-list.style.display = "flex";
-list.style.flexWrap = "wrap";
-list.style.gap = "75px";
 getData()
   .then((data) => generateCountires(data))
   .catch((error) => console.log(error));
